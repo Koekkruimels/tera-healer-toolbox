@@ -1,0 +1,12 @@
+{
+	"disableAutoUpdate": false,
+	"name": "Healer Toolbox",
+	"author": "Koekkruimels",
+	"version": "1.0.0",
+	"options": {
+		"reloadable": false,
+		"settingsVersion": 1,
+		"settingsFile": "config.json",
+		"settingsMigrator": "settings.js"
+	}
+}
