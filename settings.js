@@ -1,19 +1,19 @@
 'use strict';
 
 const defaultSettings = {
-	"deathMarkers": true,
-	"deathWarning": true,
-	"healthWarning": true,
-	"manaWarning": true,
-	"healthPercentage": 65,
-	"otherHealthPercentage": 45,
-	"manaPercentage": 20,
-	"otherManaPercentage": 25,
-	"deathSound": 'notice'
-	"deathSound": 'notice',
-	"healthSound": 'notice',
-	"manaSound": 'notice',
-	"cleanseSound": 'notice',
+    "deathMarkers": true,
+    "deathWarning": true,
+    "healthWarning": true,
+    "manaWarning": true,
+    "healthPercentage": 65,
+    "otherHealthPercentage": 45,
+    "manaPercentage": 20,
+    "otherManaPercentage": 25,
+    "deathSound": 'notice'
+    "deathSound": 'notice',
+    "healthSound": 'notice',
+    "manaSound": 'notice',
+    "cleanseSound": 'notice',
 };
 
 function migrateSettings(fromVersion, toVersion, settings) {
@@ -26,10 +26,8 @@ function migrateSettings(fromVersion, toVersion, settings) {
             settings = migrateSettings(fromVersion, fromVersion + 1, settings);
             return migrateSettings(fromVersion + 1, toVersion, settings);
         }
-		
-        switch (toVersion) {
-            
-        }
+
+        switch (toVersion) {}
 
         return settings;
     }
