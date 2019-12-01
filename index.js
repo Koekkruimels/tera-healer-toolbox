@@ -38,7 +38,7 @@ module.exports = function healerToolbox(dispatch) {
         clearData();
 
         if (enabled)
-            command.message('Changes will take effect when joinen/creating a new Party.');
+            command.message('Changes will take effect upon (re-)creating the party');
     })
 
     // MARK: Events
