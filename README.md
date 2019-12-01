@@ -1,3 +1,5 @@
+#### This version is not final, feel free to report any problems or desired changes/features!
+
 # Features
 - Death Marker (with role, inc warrior/zerk as tank support)
 - Low Health notification + sound for party members and yourself (percentage and sound type in settings)
@@ -30,6 +32,8 @@
 ![Alt text](resources/cleanse_stunned.png "Cleanse Stunned")  
 ![Alt text](resources/resurrect.png "Resurrect")  
 
-Special thanks to [Owyn](https://github.com/Owyn/party_death_marker_pointers "Party Death Marker Pointers") for the Death-Marker resources
+Special thanks to [Owyn](https://github.com/Owyn/party_death_marker_pointers "Party Death Marker Pointers") for the Death-Marker resources and [Mister-Kay](https://github.com/Mister-Kay/aura-range "Aura Range") for Aura-Range resources.
+
+**DISCLAIMER**: Not all debuffs that can be cleansed are shown, it's a limitation I'm aware of and have no intention of solving it due a lot of maintenance work. Also use this mod at your own risk, it doesn't have any type of automation and should be safe, but I'm not responsible for any problems you may face using this mod.
 
 © 2019 Koekkruimels All Rights Reserved
