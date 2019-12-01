@@ -81,9 +81,7 @@ module.exports = function healerToolbox(dispatch) {
         if (enabled == false)
             return;
 
-        let member = partyMembers.find((member) => {
-			return member.playerId == event.playerId;
-		})
+        let member = findPartyMemberByPlayerId(playerId);
 
 		if (member == undefined)
 			return;
@@ -99,10 +97,8 @@ module.exports = function healerToolbox(dispatch) {
     dispatch.hook('S_PARTY_MEMBER_CHANGE_MP', constants.Protocols.S_PARTY_MEMBER_CHANGE_MP, (event) => {
         if (enabled == false)
             return;
-
-        let member = partyMembers.find((member) => {
-			return member.playerId == event.playerId;
-		})
+		
+		let member = findPartyMemberByPlayerId(playerId);
 
 		if (member == undefined)
 			return;
@@ -139,10 +135,8 @@ module.exports = function healerToolbox(dispatch) {
     dispatch.hook('S_LEAVE_PARTY_MEMBER', constants.Protocols.S_LEAVE_PARTY_MEMBER, ({ playerId }) => {
         if (enabled == false)
             return;
-
-        partyMembers = partyMembers.filter((member) => {
-			return member.playerId != playerId;
-		})
+		
+		removePartyMember(playerId);
 
 		updateMarkers();
     })
@@ -229,8 +223,7 @@ module.exports = function healerToolbox(dispatch) {
         if (effectsCache.has(effectId))
             return;
 
-        if (partyMembers.find((member) => { return member.gameId == gameId; }) == null)
-            return;
+        let member = findPartyMemberByGameId(gameId);
 
         dispatch.queryData('/Abnormality/Abnormal@id=?/', [effectId]).then(result => {
             if (!effectsCache.has(effectId)) {
@@ -252,9 +245,7 @@ module.exports = function healerToolbox(dispatch) {
 		if (effect.isBuff == true)
 			return;
 
-		let member = partyMembers.find((member) => {
-			return member.gameId == gameId;
-		})
+		let member = findPartyMemberByGameId(gameId);
 
 		if (member == null)
 			return;
@@ -285,10 +276,8 @@ module.exports = function healerToolbox(dispatch) {
     function updateDefensiveStance(gameId, effectId, isFinished) {
         if (constants.DefensiveStances.includes(effectId) == false)
             return;
-
-		let member = partyMembers.find((member) => {
-			return member.gameId == gameId;
-		})
+		
+		let member = findPartyMemberByGameId(gameId);
 
 		if (member == undefined)
 			return;
@@ -300,7 +289,9 @@ module.exports = function healerToolbox(dispatch) {
         if (constants.AutoRescurrect.includes(effectId) == false)
             return;
 
-		if (partyMembers.find((member) => { return member.gameId == gameId; }) == null)
+		let member = findPartyMemberByGameId(gameId);;
+
+		if (member == null)
 			return;
 
 		if (effectId == constants.AutoRescurrectEffectId)
@@ -316,10 +307,8 @@ module.exports = function healerToolbox(dispatch) {
     function updateAlive(gameId, alive) {
         if (enabled == false)
             return;
-
-        let member = partyMembers.find((member) => {
-			return member.gameId == gameId;
-		})
+		
+		let member = findPartyMemberByGameId(gameId);
 
 		if (member == undefined)
 			return;
@@ -352,8 +341,8 @@ module.exports = function healerToolbox(dispatch) {
 
 			if (settings.deathMarkers == true) {
 				markers = markers.filter((marker) => {
-						return marker.target != member.gameId
-					})
+					return marker.target != member.gameId;
+				})
 			}
 		}
 
@@ -627,4 +616,22 @@ module.exports = function healerToolbox(dispatch) {
     function isHealer() {
         return currentClass == constants.Classes.priest || currentClass == constants.Classes.mystic;
     }
+	
+	function findPartyMemberByPlayerId(playerId) {
+		return partyMembers.find((member) => {
+            return member.playerId == event.playerId;
+        });
+	}
+	
+	function findPartyMemberByGameId(gameId) {
+		return partyMembers.find((member) => {
+            return member.gameId == gameId;
+        });
+	}
+	
+	function removePartyMember(playerId) {
+		partyMembers = partyMembers.filter((member) => {
+			return member.playerId != playerId;
+		});
+	}
 }
