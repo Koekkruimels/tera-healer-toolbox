@@ -1,5 +1,3 @@
-#### This version is not final, feel free to report any problems or desired changes/features!
-
 # Features
 - Death Marker (with role, inc warrior/zerk as tank support)
 - Low Health notification + sound for party members and yourself (percentage and sound type in settings)
@@ -22,8 +20,26 @@
 - **healthSound** - The sound that is played when the warning is showed. (default: 'notice')
 - **manaSound** - The sound that is played when the warning is showed. (default: 'notice')
 - **cleanseSound** - The sound that is played when the warning is showed. (default: 'notice')
+- **warningTextColor** - The text color for the warning text. (default: 'white')
+- **warningPlayersTextColor** - The text color for the warning text mentioning player names. (default: 'brightOrange')
 
-(**sound options**: notice, cling1, cling2, whisper, bell1, bell2)
+(**sound options**: notice, cling1, cling2, whisper, bell1, bell2)  
+(**text color options**: 
+![#FBA504](https://placehold.it/15/FBA504/000000?text=+) brightOrange, 
+![#000000](https://placehold.it/15/000000/000000?text=+) black, 
+![#C0C0C0](https://placehold.it/15/C0C0C0/000000?text=+) silver, 
+![#808080](https://placehold.it/15/808080/000000?text=+) gray, 
+![#FF0000](https://placehold.it/15/FF0000/000000?text=+) red, 
+![#800000](https://placehold.it/15/800000/000000?text=+) maroon, 
+![#808000](https://placehold.it/15/808000/000000?text=+) olive, 
+![#00FF00](https://placehold.it/15/00FF00/000000?text=+) lime, 
+![#008000](https://placehold.it/15/008000/000000?text=+) green, 
+![#00FFFF](https://placehold.it/15/00FFFF/000000?text=+) aqua, 
+![#008080](https://placehold.it/15/008080/000000?text=+) teal, 
+![#0000FF](https://placehold.it/15/0000FF/000000?text=+) blue, 
+![#000080](https://placehold.it/15/000080/000000?text=+) navy, 
+![#FF00FF](https://placehold.it/15/FF00FF/000000?text=+) fuchia, 
+![#800080](https://placehold.it/15/800080/000000?text=+) purple)
 
 # Examples
 ![Alt text](resources/heal.png "Heal")  
