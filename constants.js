@@ -75,8 +75,22 @@ const SKILLS = {
 }
 
 const TEXT_COLORS = {
-    brightOrange: "#FBA504",
-    white: "#FFFFFF"
+    brightOrange: "FBA504",
+    white: "FFFFFF",
+	black: "000000",
+	silver: "C0C0C0",
+	gray: "808080",
+	red: "FF0000",
+	maroon: "800000",
+	olive: "808000",
+	lime: "00FF00",
+	green: "008000",
+	aqua: "00FFFF",
+	teal: "008080",
+	blue: "0000FF",
+	navy: "000080",
+	fuchia: "FF00FF",
+	purple: "800080"
 }
 
 const AUTO_RESCURRECT = [700100, 801700, 4951, 4954];

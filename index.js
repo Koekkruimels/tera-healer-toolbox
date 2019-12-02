@@ -500,8 +500,10 @@ module.exports = function healerToolbox(dispatch) {
 
 		warningsTimeout.delete(type);
 		pendingWarnings.delete(type);
+		
+		let textColor = getTextColor(settings.warningTextColor);
 
-		let announcement = `<img src="img://skill__0__${currentTemplate}__${skillId}" width="48" height="48" vspace="-20"/><font size="24" color="${constants.TextColors.white}">&nbsp;${message}</font>`;
+		let announcement = `<img src="img://skill__0__${currentTemplate}__${skillId}" width="48" height="48" vspace="-20"/><font size="24" color="#${textColor}">&nbsp;${message}</font>`;
 		let soundType = getWarningSoundType(type);
 
 		playSound(soundType);
@@ -509,7 +511,8 @@ module.exports = function healerToolbox(dispatch) {
     }
 
     function getMessage(type, names) {
-        let namesString = `<font color="${constants.TextColors.brightOrange}">${names.join(", ")}</font>`;
+		let textColor = getTextColor(settings.warningPlayersTextColor);
+        let namesString = `<font color="#${textColor}">${names.join(", ")}</font>`;
 
 		switch (type) {
 		case constants.WarningTypes.health:
@@ -612,6 +615,55 @@ module.exports = function healerToolbox(dispatch) {
             return -1;
         }
     }
+	
+	function getTextColor(name) {
+		switch (name) {
+        case 'brightOrange':
+            return constants.TextColors.brightOrange;
+        case 'white':
+           return constants.TextColors.white;
+	   case 'black':
+           return constants.TextColors.black;
+	   case 'silver':
+           return constants.TextColors.silver;
+	   case 'gray':
+           return constants.TextColors.gray;
+	   case 'red':
+           return constants.TextColors.red;
+	   case 'maroon':
+           return constants.TextColors.maroon;
+	   case 'olive':
+           return constants.TextColors.olive;
+	   case 'lime':
+           return constants.TextColors.lime;
+	   case 'green':
+           return constants.TextColors.green;
+	   case 'aqua':
+           return constants.TextColors.aqua;
+	   case 'teal':
+           return constants.TextColors.teal;
+	   case 'blue':
+           return constants.TextColors.blue;
+	   case 'navy':
+           return constants.TextColors.navy;
+	   case 'fuchia':
+           return constants.TextColors.fuchia;
+	   case 'purple':
+           return constants.TextColors.purple;
+        default:
+			if (isHexColor(name)) {
+				return name;
+			}
+			
+			return constants.TextColors.white;
+        }
+	}
+	
+	function isHexColor(hex) {
+		return typeof hex === 'string'
+			&& hex.length === 6
+			&& !isNaN(Number('0x' + hex))
+	}
 
     function isHealer() {
         return currentClass == constants.Classes.priest || currentClass == constants.Classes.mystic;
@@ -619,7 +671,7 @@ module.exports = function healerToolbox(dispatch) {
 	
 	function findPartyMemberByPlayerId(playerId) {
 		return partyMembers.find((member) => {
-            return member.playerId == event.playerId;
+            return member.playerId == playerId;
         });
 	}
 	

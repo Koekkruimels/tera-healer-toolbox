@@ -9,11 +9,13 @@ const defaultSettings = {
     "otherHealthPercentage": 45,
     "manaPercentage": 20,
     "otherManaPercentage": 25,
-    "deathSound": 'notice'
+    "deathSound": 'notice',
     "deathSound": 'notice',
     "healthSound": 'notice',
     "manaSound": 'notice',
     "cleanseSound": 'notice',
+	"warningTextColor": 'white',
+	"warningPlayersTextColor": 'brightOrange'
 };
 
 function migrateSettings(fromVersion, toVersion, settings) {
