@@ -81,7 +81,7 @@ module.exports = function healerToolbox(dispatch) {
         if (enabled == false)
             return;
 
-        let member = findPartyMemberByPlayerId(playerId);
+        let member = findPartyMemberByPlayerId(event.playerId);
 
 		if (member == undefined)
 			return;
@@ -98,7 +98,7 @@ module.exports = function healerToolbox(dispatch) {
         if (enabled == false)
             return;
 		
-		let member = findPartyMemberByPlayerId(playerId);
+		let member = findPartyMemberByPlayerId(event.playerId);
 
 		if (member == undefined)
 			return;
@@ -289,7 +289,7 @@ module.exports = function healerToolbox(dispatch) {
         if (constants.AutoRescurrect.includes(effectId) == false)
             return;
 
-		let member = findPartyMemberByGameId(gameId);;
+		let member = findPartyMemberByGameId(gameId);
 
 		if (member == null)
 			return;
