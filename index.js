@@ -6,9 +6,12 @@ module.exports = function healerToolbox(dispatch) {
     // MARK: Variables
 
     let enabled = true;
+	
+	let isUpdatingMarkers = false;
 
     let markerDelayTimeout = null;
 
+	let realMarkers = [];
     let markers = [];
     let partyMembers = [];
 
@@ -51,7 +54,7 @@ module.exports = function healerToolbox(dispatch) {
         currentTemplate = event.templateId;
         currentClass = (event.templateId - 10101) % 100;
 
-        removeEffect(currentGameId, constants.AutoRescurrectEffectId);
+        removeEffect(currentGameId, getAutoRescurrectEffect());
 
         enabled = isHealer();
     })
@@ -75,6 +78,13 @@ module.exports = function healerToolbox(dispatch) {
 				gameId: member.gameId
 			}
 		})
+    })
+	
+	dispatch.hook('S_PARTY_MARKER', 1, {order: 100, filter: {fake: null}}, ({markers}) => {
+		if (isUpdatingMarkers)
+			return;
+		
+		realMarkers = markers;
     })
 
     dispatch.hook('S_PARTY_MEMBER_CHANGE_HP', constants.Protocols.S_PARTY_MEMBER_CHANGE_HP, (event) => {
@@ -136,8 +146,15 @@ module.exports = function healerToolbox(dispatch) {
         if (enabled == false)
             return;
 		
+		let member = findPartyMemberByPlayerId(playerId);
+		
+		if (member == null)
+			return;
+		
+        removeEffect(member.gameId, getAutoRescurrectEffect());
+		
 		removePartyMember(playerId);
-
+		
 		updateMarkers();
     })
 
@@ -150,7 +167,7 @@ module.exports = function healerToolbox(dispatch) {
 
 		updateMarkers();
 
-        removeEffect(currentGameId, constants.AutoRescurrectEffectId);
+        removeEffect(currentGameId, getAutoRescurrectEffect());
     })
 
     dispatch.hook('S_ABNORMALITY_BEGIN', constants.Protocols.S_ABNORMALITY_BEGIN, (event) => {
@@ -294,13 +311,13 @@ module.exports = function healerToolbox(dispatch) {
 		if (member == null)
 			return;
 
-		if (effectId == constants.AutoRescurrectEffectId)
+		if (effectId == getAutoRescurrectEffect())
 			return false;
 
 		if (isFinished) {
-			removeEffect(gameId, constants.AutoRescurrectEffectId);
+			removeEffect(gameId, getAutoRescurrectEffect());
 		} else {
-			applyEffect(gameId, constants.AutoRescurrectEffectId);
+			applyEffect(gameId, getAutoRescurrectEffect());
 		}
     }
 
@@ -353,9 +370,15 @@ module.exports = function healerToolbox(dispatch) {
     }
 
     function updateMarkers() {
+		isUpdatingMarkers = true;
+		
+		let partyMarkers = realMarkers.length ? realMarkers.concat(markers) : markers;
+		
         dispatch.send('S_PARTY_MARKER', constants.Protocols.S_PARTY_MARKER, {
-            markers: markers
+            markers: partyMarkers
         });
+		
+		isUpdatingMarkers = false;
     }
 
     function applyEffect(gameId, effectId) {
@@ -404,7 +427,7 @@ module.exports = function healerToolbox(dispatch) {
 		clearTimeout(markerDelayTimeout);
 		markerDelayTimeout = null;
 
-		removeEffect(currentGameId, constants.AutoRescurrectEffectId);
+		removeEffect(currentGameId, getAutoRescurrectEffect());
 
 		updateMarkers();
     }
@@ -657,6 +680,10 @@ module.exports = function healerToolbox(dispatch) {
 			
 			return constants.TextColors.white;
         }
+	}
+	
+	function getAutoRescurrectEffect() {
+		return constants.VisualEffects.apexUrgency
 	}
 	
 	function isHexColor(hex) {

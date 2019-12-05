@@ -93,14 +93,17 @@ const TEXT_COLORS = {
 	purple: "800080"
 }
 
+const VISUAL_EFFECTS = {
+	emergencyBarrier: 10152110,
+	apexUrgency: 90520
+}
+
 const AUTO_RESCURRECT = [700100, 801700, 4951, 4954];
-const AUTO_RESCURRECT_EFFECT_ID = 90520;
 
 const DEFENSIVE_STANCES = [100203, 100202, 100201, 100200, 401400, 401402, 401404];
 
 module.exports = {
     AutoRescurrect: AUTO_RESCURRECT,
-    AutoRescurrectEffectId: AUTO_RESCURRECT_EFFECT_ID,
     TextColors: TEXT_COLORS,
     Classes: CLASSES,
     MarkerColors: MARKER_COLORS,
@@ -109,5 +112,6 @@ module.exports = {
     AbnormalityProperties: ABNORMALITY_PROPERTIES,
     Skills: SKILLS,
     DefensiveStances: DEFENSIVE_STANCES,
-    Protocols: PROTOCOLS
+    Protocols: PROTOCOLS,
+	VisualEffects: VISUAL_EFFECTS
 };
