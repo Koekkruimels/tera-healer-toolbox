@@ -54,7 +54,7 @@ module.exports = function healerToolbox(dispatch) {
         currentTemplate = event.templateId;
         currentClass = (event.templateId - 10101) % 100;
 
-        removeEffect(currentGameId, getAutoRescurrectEffect());
+        removeEffect(currentGameId, getAutoRescurrectEffect(settings.autoRecurrectEffect));
 
         enabled = isHealer();
     })
@@ -151,7 +151,7 @@ module.exports = function healerToolbox(dispatch) {
 		if (member == null)
 			return;
 		
-        removeEffect(member.gameId, getAutoRescurrectEffect());
+        removeEffect(member.gameId, getAutoRescurrectEffect(settings.autoRecurrectEffect));
 		
 		removePartyMember(playerId);
 		
@@ -167,7 +167,7 @@ module.exports = function healerToolbox(dispatch) {
 
 		updateMarkers();
 
-        removeEffect(currentGameId, getAutoRescurrectEffect());
+        removeEffect(currentGameId, getAutoRescurrectEffect(settings.autoRecurrectEffect));
     })
 
     dispatch.hook('S_ABNORMALITY_BEGIN', constants.Protocols.S_ABNORMALITY_BEGIN, (event) => {
@@ -243,6 +243,9 @@ module.exports = function healerToolbox(dispatch) {
         let member = findPartyMemberByGameId(gameId);
 
         dispatch.queryData('/Abnormality/Abnormal@id=?/', [effectId]).then(result => {
+			if (result == null || result.attributes == null)
+				return;
+			
             if (!effectsCache.has(effectId)) {
 				let effectData = { isBuff: result.attributes.isBuff, type: result.attributes.property };
 				
@@ -311,13 +314,13 @@ module.exports = function healerToolbox(dispatch) {
 		if (member == null)
 			return;
 
-		if (effectId == getAutoRescurrectEffect())
+		if (effectId == getAutoRescurrectEffect(settings.autoRecurrectEffect))
 			return false;
 
 		if (isFinished) {
-			removeEffect(gameId, getAutoRescurrectEffect());
+			removeEffect(gameId, getAutoRescurrectEffect(settings.autoRecurrectEffect));
 		} else {
-			applyEffect(gameId, getAutoRescurrectEffect());
+			applyEffect(gameId, getAutoRescurrectEffect(settings.autoRecurrectEffect));
 		}
     }
 
@@ -427,7 +430,7 @@ module.exports = function healerToolbox(dispatch) {
 		clearTimeout(markerDelayTimeout);
 		markerDelayTimeout = null;
 
-		removeEffect(currentGameId, getAutoRescurrectEffect());
+		removeEffect(currentGameId, getAutoRescurrectEffect(settings.autoRecurrectEffect));
 
 		updateMarkers();
     }
@@ -677,13 +680,20 @@ module.exports = function healerToolbox(dispatch) {
 			if (isHexColor(name)) {
 				return name;
 			}
-			
+			  
 			return constants.TextColors.white;
         }
 	}
 	
-	function getAutoRescurrectEffect() {
-		return constants.VisualEffects.apexUrgency
+	function getAutoRescurrectEffect(name) {
+		switch (name) {
+        case 'emergencyBarrier':
+			return constants.VisualEffects.emergencyBarrier
+		case 'apexUrgency':
+			return constants.VisualEffects.apexUrgency
+		default:
+			return -1;
+		}
 	}
 	
 	function isHexColor(hex) {

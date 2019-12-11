@@ -5,6 +5,7 @@ const defaultSettings = {
     "deathWarning": true,
     "healthWarning": true,
     "manaWarning": true,
+	"autoRessurect": true,
     "healthPercentage": 65,
     "otherHealthPercentage": 45,
     "manaPercentage": 20,
@@ -15,7 +16,8 @@ const defaultSettings = {
     "manaSound": 'notice',
     "cleanseSound": 'notice',
 	"warningTextColor": 'white',
-	"warningPlayersTextColor": 'brightOrange'
+	"warningPlayersTextColor": 'brightOrange',
+	"autoRecurrectEffect": 'apexUrgency'
 };
 
 function migrateSettings(fromVersion, toVersion, settings) {
