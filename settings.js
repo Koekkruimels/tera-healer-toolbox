@@ -5,7 +5,6 @@ const defaultSettings = {
     "deathWarning": true,
     "healthWarning": true,
     "manaWarning": true,
-	"autoRessurect": true,
     "healthPercentage": 65,
     "otherHealthPercentage": 45,
     "manaPercentage": 20,
