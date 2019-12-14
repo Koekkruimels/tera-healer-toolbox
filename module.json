@@ -2,11 +2,20 @@
 	"disableAutoUpdate": false,
 	"name": "Healer Toolbox",
 	"author": "Koekkruimels",
+	"description": "Quality of life changes to increase awareness of your party members status.",
 	"version": "1.0.0",
+	"conflicts": [
+		"party_death_marker_pointers",
+		"aura-range"
+	],
 	"options": {
 		"reloadable": false,
 		"settingsVersion": 1,
 		"settingsFile": "config.json",
 		"settingsMigrator": "settings.js"
-	}
+	},
+	"servers": [
+		"https://raw.githubusercontent.com/Koekkruimels/tera-healer-toolboxs/master/"
+	],
+	"supportUrl": "https://github.com/Koekkruimels/tera-healer-toolbox/issues"
 }
