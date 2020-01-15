@@ -15,7 +15,7 @@
 		"settingsMigrator": "settings.js"
 	},
 	"servers": [
-		"https://raw.githubusercontent.com/Koekkruimels/tera-healer-toolboxs/master/"
+		"https://raw.githubusercontent.com/Koekkruimels/tera-healer-toolbox/master/"
 	],
 	"supportUrl": "https://github.com/Koekkruimels/tera-healer-toolbox/issues"
 }
