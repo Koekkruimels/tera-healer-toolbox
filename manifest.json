@@ -1,6 +1,6 @@
 {
   "files": {
-    "constants.js": "4dc438d7551f7e2307fb5f2e2ea985d61814f0ac22ed8af5ce0a3b4bf3aa05f3",
+    "constants.js": "af65615a2801598ef6867e6c2aa06e644a58ffc506ffb09734684e296f5dd928",
     "index.js": "9d0427af33e5647eac39db53b4fffc63854b59006cdb04817d245fdf83db97f8",
     "module.json": "c11c8e420cf9af877bd91cd486133a93cddf82e063402b85d61ef0a4282bb3eb",
     "README.md": "f71866442a87ae3109a9b5b4b87bf6e08c22face1f5a001c96a80b752a22a22e",
@@ -23,7 +23,7 @@
 		"S_ABNORMALITY_END": 1,
 		"S_PARTY_MARKER": 1,
 		"S_DUNGEON_EVENT_MESSAGE": 2,
-    "S_PLAY_SOUND": 1,
-    "C_PLAYER_LOCATION": 5
+                "S_PLAY_SOUND": 1,
+                "C_PLAYER_LOCATION": 5
 	}
 }
